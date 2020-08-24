@@ -52,7 +52,7 @@ public class EmployeeEntity implements Serializable {
 //	@NaturalId
 //	Integer SSN;
 
-
+	// Setters and Getters
 
 	public String getFirstName() {
 		return firstName;
@@ -69,13 +69,6 @@ public class EmployeeEntity implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-
-
-
-
-
-
-	// Setters and Getters
+	
 
 }
