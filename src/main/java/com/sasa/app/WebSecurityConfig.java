@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.sasa.app.filters.JwtRequestFilter;
 import com.sasa.app.utlies.JwtAuthenticationEntryPoint;
 
-@SuppressWarnings("deprecation")
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -32,10 +32,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(appUserDetailsService);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return NoOpPasswordEncoder.getInstance();
+//	}
 
 //	@Bean
 //	public PasswordEncoder passwordEncoder() {
@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// We don't need CSRF for this example
 		httpSecurity.cors().and().csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/", "/*.*", "/item-type", "/login", "/about", "/home", "/assets/**",
+				.authorizeRequests().antMatchers("/**",/*"/", "/*.*", "/item-type", "/login", "/about", "/home", */ "/companies/**", "/products/**" ,"/assets/**",
 						"/api/v1/authenticate", "/register")
 				.permitAll().
 				// all other requests need to be authenticated
