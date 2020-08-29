@@ -9,7 +9,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,12 +53,13 @@ public class AppController {
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
 			throws Exception {
-		logger.warn("---> {}", authenticationRequest.getPassword());
+
+	
 		try {
 			String password = "";
 			encoder = new BCryptPasswordEncoder();
 			String ecodedPassword = encoder.encode(authenticationRequest.getPassword());
-			logger.warn("---> {} -- {}", authenticationRequest.getPassword(), ecodedPassword);
+			logger.debug("---> {} -- {}", authenticationRequest.getPassword(), ecodedPassword);
 			if (encoder.matches(authenticationRequest.getPassword(),
 					userDetailsService.loadUserByUsername(authenticationRequest.getUsername()).getPassword())) {
 				password = userDetailsService.loadUserByUsername(authenticationRequest.getUsername()).getPassword();
@@ -71,7 +71,7 @@ public class AppController {
 		}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-		System.out.println(userDetails.getUsername() + "   " + authenticationRequest.getUsername());
+
 
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 

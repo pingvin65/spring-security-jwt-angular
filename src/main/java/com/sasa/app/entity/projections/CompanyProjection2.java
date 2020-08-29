@@ -5,16 +5,16 @@ import org.springframework.data.rest.core.config.Projection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sasa.app.entity.Company;
 
-@Projection(name = "company2products", types = { Company.class })
-public interface CompanyProjection {
+@Projection(name = "company", types = { Company.class })
+public interface CompanyProjection2 {
 
 	@JsonProperty("company_name")
 	String getName();
 	
-	interface Product{
-		@JsonProperty("product_name")
-		String getName();
-	}
+//	interface ProductEntity{
+//		@JsonProperty("product_name")
+//		String getName();
+//	}
 	
 //	@JsonProperty("company")
 //	CompanyEntity getCompany();

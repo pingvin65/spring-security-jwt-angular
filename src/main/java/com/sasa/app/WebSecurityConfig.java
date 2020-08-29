@@ -5,17 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.sasa.app.filters.JwtRequestFilter;
 import com.sasa.app.utlies.JwtAuthenticationEntryPoint;
-
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -36,23 +33,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //	public PasswordEncoder passwordEncoder() {
 //		return NoOpPasswordEncoder.getInstance();
 //	}
-
 //	@Bean
 //	public PasswordEncoder passwordEncoder() {
-//		return new PasswordEncoder() {
-//			@Override
-//			public String encode(CharSequence rawPassword) {
-//				return rawPassword.toString();
-//			}
-//
-//			@Override
-//			public boolean matches(CharSequence rawPassword, String encodedPassword) {
-//				return rawPassword.toString().equals(encodedPassword);
-//			}
-//		};
+//		return new BCryptPasswordEncoder();
 //	}
-	
-	
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new PasswordEncoder() {
+			@Override
+			public String encode(CharSequence rawPassword) {
+				return rawPassword.toString();
+			}
+
+			@Override
+			public boolean matches(CharSequence rawPassword, String encodedPassword) {
+				return rawPassword.toString().equals(encodedPassword);
+			}
+		};
+	}
 
 	@Override
 	@Bean
@@ -60,12 +59,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+//        return source;
+//    }
+
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
 		// We don't need CSRF for this example
 		httpSecurity.cors().and().csrf().disable()
 				// dont authenticate this particular request
+//				.authorizeRequests().antMatchers("/", "/*.*", "/item-type", "/login", "/about", "/home",
+//						"/companies/**", "/products/**", "/assets/**", "/api/v1/authenticate", "/register")
 				.authorizeRequests().antMatchers("/**",/*"/", "/*.*", "/item-type", "/login", "/about", "/home", */ "/companies/**", "/products/**" ,"/assets/**",
 						"/api/v1/authenticate", "/register")
 				.permitAll().

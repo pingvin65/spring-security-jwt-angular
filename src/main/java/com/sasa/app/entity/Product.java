@@ -1,5 +1,6 @@
 package com.sasa.app.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 @Entity
 @Table(name = "product")
 public class Product {
@@ -19,7 +18,11 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(unique = true)
 	private String name;
+	
+	@Column(columnDefinition = "MEDIUMTEXT")
+	private String description;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
@@ -29,9 +32,10 @@ public class Product {
 		super();
 	}
 
-	public Product(String name, Company company) {
+	public Product(String name, String description, Company company) {
 		super();
 		this.name = name;
+		this.description = description;
 		this.company = company;
 	}
 
@@ -51,12 +55,20 @@ public class Product {
 		this.name = name;
 	}
 
-//	public CompanyEntity getCompany() {
-//		return company;
-//	}
-//
-//	public void setCompany(CompanyEntity company) {
-//		this.company = company;
-//	}
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 
 }

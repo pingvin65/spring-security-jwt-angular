@@ -1083,4 +1083,23 @@ INSERT INTO product (name, company_id) VALUES ('G8', '6');
 INSERT INTO product (name, company_id) VALUES ('G9', '6');
 INSERT INTO product (name, company_id) VALUES ('G9 PRO', '6');
 
+SET SQL_SAFE_UPDATES=0;
+update product set 
+description = "The easiest way to check your phone's model name and number is to use the phone itself. 
+Go to the Settings or Options menu, scroll to the bottom of the list, and check 'About phone', 
+'About device' or similar. The device name and model number should be listed." 
+where description IS NULL;
+SET SQL_SAFE_UPDATES=1;
+
+SET SQL_SAFE_UPDATES=0;
+update company set 
+description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+It has survived not only five centuries, but also the leap into electronic typesetting, 
+remaining essentially unchanged. It was popularised in the 1960s with the release of 
+Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
+software like Aldus PageMaker including versions of Lorem Ipsum." 
+where description IS NULL;
+SET SQL_SAFE_UPDATES=1;
 

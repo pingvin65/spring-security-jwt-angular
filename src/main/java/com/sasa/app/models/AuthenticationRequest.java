@@ -19,7 +19,6 @@ public class AuthenticationRequest implements Serializable {
 
 	protected AuthenticationRequest(String username, String password) {
 		super();
-		System.out.print(password);
 		this.username = username;
 		this.password = password;
 	}
