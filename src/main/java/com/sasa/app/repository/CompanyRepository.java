@@ -20,19 +20,4 @@ import com.sasa.app.entity.projections.CompanyProjectionView;
 @RepositoryRestResource(excerptProjection = CompanyProjection.class, collectionResourceRel = "companies", path = "companies")
 public interface CompanyRepository extends PagingAndSortingRepository<Company, Integer> {
 
-//	Page<Company> findById(Integer id, Pageable parameter);
-
-//	@Query(value = "select * from company, product where company.id = 1 and product.company_id = 1", nativeQuery = true)
-//	@Query("select c from company cwhere c.id = ?1")
-//	Page<Company> getProductCompanId(@Param("id") Integer id, Pageable p);
-	
-//	@Query("select c from Company c where c.id = :id")
-////	@RestResource(exported = false)
-//	public Optional<CompanyProjectionView> findByNameQueryNamedParam(@Param("id") Integer id);
-	
-
-
-//	@RestResource(exported = false)
-//	Optional<Company> findById(Integer id);
-
 }
