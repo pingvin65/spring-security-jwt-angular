@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.config.Projection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sasa.app.entity.Company;
 
-@Projection(name = "company", types = { Company.class })
+@Projection(name = "company2", types = { Company.class })
 public interface CompanyProjection2 {
 
 	@JsonProperty("company_name")

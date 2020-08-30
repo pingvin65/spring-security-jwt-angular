@@ -54,7 +54,6 @@ public class AppController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
 			throws Exception {
 
-	
 		try {
 			String password = "";
 			encoder = new BCryptPasswordEncoder();
@@ -72,15 +71,9 @@ public class AppController {
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 
-//	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
-//	public ResponseEntity<?> createUser(@RequestBody AuthenticationRequest authenticationRequest) {
-//		return null;
-//
-//	}
 }
