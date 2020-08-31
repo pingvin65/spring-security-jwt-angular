@@ -60,34 +60,22 @@ public class CompanyController implements RepresentationModelProcessor<EntityMod
 		 return model;
 	}
 
-	@RequestMapping(value = "companies/{id}", method = RequestMethod.GET)
-	public HttpEntity<?> getCompanyById(@PathVariable(value = "id") Integer id) {
-
-		try {
-//			logger.debug("---> idKey {}", id);
-			if (companyRepository.existsById(id)) {
-				return ResponseEntity.ok(companyRepository.findByNameQueryNamedParam(id));
-			}else {
-				return ResponseEntity.notFound().build();
-			}
-		} catch (ResourceNotFoundException ex) {
-
-			logger.error(ex.getMessage());
-			return ResponseEntity.notFound().build();
-		}
-
-	}
-
-	
-//	@RequestMapping(value = "companies/{id}/products", method = RequestMethod.GET, produces="application/hal+json")
-//	public HttpEntity<?> getCompanyByIdAndProducts(@PathVariable(value = "id") Integer id, Pageable pageable) {
-//		
-////		companyRepository.findById(id);
-////		Page<Product> page = productRepository.findByCompanyId(id, pageable);
-////		Resources<String> resources = new Resources<String>(page); 
-//		PageRequest page = PageRequest.of(
-//	            0, 4, Sort.by("id").descending());
-//		return ResponseEntity.ok(productRepository.findByCompanyId(id, page));
-//		
+//	@RequestMapping(value = "companies/{id}", method = RequestMethod.GET)
+//	public HttpEntity<?> getCompanyById(@PathVariable(value = "id") Integer id) {
+//
+//		try {
+//
+//			if (companyRepository.existsById(id)) {
+//				return ResponseEntity.ok(companyRepository.findByNameQueryNamedParam(id));
+//			}else {
+//				return ResponseEntity.notFound().build();
+//			}
+//		} catch (ResourceNotFoundException ex) {
+//
+//			logger.error(ex.getMessage());
+//			return ResponseEntity.notFound().build();
+//		}
+//
 //	}
+
 }

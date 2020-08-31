@@ -1,9 +1,13 @@
 # spring-security-jwt-angular
+### MySQL DB
+![home page](./images/peachjwt.svg)
 
 ``` bash
 $ tree -I 'node_modules|cache|test*|target'
 .
 ├── HELP.md
+├── images
+│   └── peachjwt.svg
 ├── mvnw
 ├── mvnw.cmd
 ├── pom.xml
@@ -35,7 +39,6 @@ $ tree -I 'node_modules|cache|test*|target'
     │   │   │   │   ├── app.component.js
     │   │   │   │   ├── app.module.js
     │   │   │   │   └── app-routing.module.js
-    │   │   │   ├── interfaces
     │   │   │   ├── pages
     │   │   │   │   ├── about
     │   │   │   │   │   ├── about.component.html
@@ -90,6 +93,7 @@ $ tree -I 'node_modules|cache|test*|target'
     │   │   │   │   │   ├── api-company-single.ts
     │   │   │   │   │   ├── api-company.ts
     │   │   │   │   │   ├── api-page.ts
+    │   │   │   │   │   ├── api-product.ts
     │   │   │   │   │   ├── api-user.ts
     │   │   │   │   │   └── dist
     │   │   │   │   │       ├── api-company.js
@@ -148,15 +152,13 @@ $ tree -I 'node_modules|cache|test*|target'
         │               │   └── IndexController.java
         │               ├── entity
         │               │   ├── Company.java
-        │               │   ├── EmployeeEntity.java
-        │               │   ├── ItemTypeEntity.java
         │               │   ├── Product.java
         │               │   ├── projections
         │               │   │   ├── CompanyProjection2.java
         │               │   │   ├── CompanyProjection.java
         │               │   │   ├── CompanyProjectionView.java
+        │               │   │   ├── ProductProjectionByCompany.java
         │               │   │   └── ProductProjection.java
-        │               │   ├── RegionEntity.java
         │               │   └── UserEntity.java
         │               ├── filters
         │               │   └── JwtRequestFilter.java
@@ -165,9 +167,7 @@ $ tree -I 'node_modules|cache|test*|target'
         │               │   └── AuthenticationResponse.java
         │               ├── MvcConfig.java
         │               ├── repository
-        │               │   ├── CompanyRepository2.java
         │               │   ├── CompanyRepository.java
-        │               │   ├── ItemTypeRepository.java
         │               │   ├── ProductRepository.java
         │               │   └── UserRepository.java
         │               ├── service
@@ -197,6 +197,6 @@ $ tree -I 'node_modules|cache|test*|target'
                 ├── error1.html
                 └── index.html
 
-54 directories, 139 files
+54 directories, 137 files
 $ 
 ```
