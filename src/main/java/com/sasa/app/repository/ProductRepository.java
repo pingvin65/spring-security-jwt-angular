@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.sasa.app.entity.Product;
 import com.sasa.app.entity.projections.ProductProjection;
-import com.sasa.app.entity.projections.ProductProjectionByCompany;
 
 @CrossOrigin
 @RepositoryRestResource(excerptProjection = ProductProjection.class, collectionResourceRel = "products", path = "products")

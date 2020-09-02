@@ -2,6 +2,7 @@ package com.sasa.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,15 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(appUserDetailsService);
 	}
 
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		return NoOpPasswordEncoder.getInstance();
-//	}
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new PasswordEncoder() {
@@ -59,28 +51,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-//        return source;
-//    }
-
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
 		// We don't need CSRF for this example
-		httpSecurity.cors().and().csrf().disable()
+		httpSecurity.cors().and().
+				csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET,"/post/**").permitAll().
+				and().csrf().disable()
 				/* real settings */
-//				.authorizeRequests().antMatchers("/", "/*.*", "/item-type", "/login", "/about", "/home",
-//						"/companies/**", "/products/**", "/assets/**", "/api/v1/authenticate", "/register")
+				.authorizeRequests().antMatchers("/", "/*.*", "/item-type", "/login", "/about", "/home",
+						"/companies/**", "/products/**", "/assets/**", "/api/v1/authenticate", "/register")
 				/* for testing */
-				.authorizeRequests().antMatchers("/**",/*"/", "/*.*", "/item-type", "/login", "/about", "/home", */ "/companies/**", "/products/**" ,"/assets/**",
-						"/api/v1/authenticate", "/register")
+//				.authorizeRequests().antMatchers("/**", "/companies/**", "/products/**" ,"/assets/**",
+//						"/api/v1/authenticate", "/register")
 				.permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
-
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

@@ -1,6 +1,28 @@
 # spring-security-jwt-angular
+
+## status - work in progress - not completed
+
 ### MySQL DB
-![home page](./images/peachjwt.svg)
+
+![MySQL DB](./images/peachjwt.svg)
+
+### Home page
+
+![home page](./images/home.png)
+
+### Login page
+
+![login page](./images/login.png)
+
+### Brands (Companies)
+
+![Brands](./images/brandsToLogin.png)
+
+![Brands](./images/brands.png)
+
+![Brands](./images/brandsToLogin.png)
+
+![Brands](./images/brandsNav.png)
 
 ``` bash
 $ tree -I 'node_modules|cache|test*|target'
@@ -152,6 +174,7 @@ $ tree -I 'node_modules|cache|test*|target'
         │               │   └── IndexController.java
         │               ├── entity
         │               │   ├── Company.java
+        │               │   ├── Post.java
         │               │   ├── Product.java
         │               │   ├── projections
         │               │   │   ├── CompanyProjection2.java
@@ -168,6 +191,7 @@ $ tree -I 'node_modules|cache|test*|target'
         │               ├── MvcConfig.java
         │               ├── repository
         │               │   ├── CompanyRepository.java
+        │               │   ├── PostRepository.java
         │               │   ├── ProductRepository.java
         │               │   └── UserRepository.java
         │               ├── service
@@ -188,8 +212,8 @@ $ tree -I 'node_modules|cache|test*|target'
             │   ├── favicon.ico
             │   ├── index.html
             │   ├── logo.0c77ce517bcdb7b790f8.svg
-            │   ├── main.640da9e4d0e4499be0a9.js
-            │   ├── polyfills.e0a50bd2db48958ec104.js
+            │   ├── main.03ec1f49dcfdfc66bb8e.js
+            │   ├── polyfills.4dc3b73f451c53467b36.js
             │   ├── runtime.e227d1a0e31cbccbf8ec.js
             │   └── styles.237c5230b53f3f54c859.css
             ├── static
@@ -197,6 +221,7 @@ $ tree -I 'node_modules|cache|test*|target'
                 ├── error1.html
                 └── index.html
 
-54 directories, 137 files
+54 directories, 139 files
+
 $ 
 ```
