@@ -1,5 +1,7 @@
 package com.sasa.app;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -11,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.sasa.app.filters.JwtRequestFilter;
 import com.sasa.app.utlies.JwtAuthenticationEntryPoint;
@@ -56,13 +61,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// We don't need CSRF for this example
 		httpSecurity.cors().and().
-				csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET,"/post/**").permitAll().
-				and().csrf().disable()
-				/* real settings */
-				.authorizeRequests().antMatchers("/", "/*.*", "/item-type", "/login", "/about", "/home",
-						"/companies/**", "/products/**", "/assets/**", "/api/v1/authenticate", "/register")
+		/* real settings */
+				csrf()
+				.disable().authorizeRequests().antMatchers("/", "/*.*", "/item-type", "/login", "/about", "/home",
+						"/api/v1/authenticate", "/register", "/posts/**")
 				/* for testing */
-//				.authorizeRequests().antMatchers("/**", "/companies/**", "/products/**" ,"/assets/**",
+//				.authorizeRequests().antMatchers("/**", "/companies/**", "/products/**" ,"/assets/**", "/posts/**"
 //						"/api/v1/authenticate", "/register")
 				.permitAll().
 				// all other requests need to be authenticated
@@ -75,4 +79,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
+
+//	@Bean
+//	CorsConfigurationSource corsConfigurationSource() {
+//		CorsConfiguration configuration = new CorsConfiguration();
+//		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
+//		configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		source.registerCorsConfiguration("/**", configuration);
+//		return source;
+//	}
 }

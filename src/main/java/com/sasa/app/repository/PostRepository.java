@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.sasa.app.entity.Post;
 
 @CrossOrigin
-@RepositoryRestResource(collectionResourceRel = "post", path = "post")
+@RepositoryRestResource(collectionResourceRel = "posts", path = "posts")
 public interface PostRepository extends PagingAndSortingRepository<Post, Integer> {
 	
 	@RestResource(path = "title", rel = "title")
