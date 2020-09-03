@@ -63,14 +63,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors().and().
 		/* real settings */
 				csrf()
-				.disable().authorizeRequests().antMatchers("/", "/*.*", "/item-type", "/login", "/about", "/home",
-						"/api/v1/authenticate", "/register", "/posts/**")
+				.disable().authorizeRequests().antMatchers("/", "/*.*", "/brands", "/login", "/about", "/home", "/models", "/assets/**",  "/posts/**", 
+						"/api/v1/authenticate", "/register")
 				/* for testing */
 //				.authorizeRequests().antMatchers("/**", "/companies/**", "/products/**" ,"/assets/**", "/posts/**"
 //						"/api/v1/authenticate", "/register")
-				.permitAll().
+				.permitAll().anyRequest().authenticated().and().
 				// all other requests need to be authenticated
-				anyRequest().authenticated().and().
+				
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
