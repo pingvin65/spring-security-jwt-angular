@@ -1,21 +1,16 @@
 package com.sasa.app;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.sasa.app.filters.JwtRequestFilter;
 import com.sasa.app.utlies.JwtAuthenticationEntryPoint;
@@ -63,10 +58,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors().and().
 		/* real settings */
 				csrf()
-				.disable().authorizeRequests().antMatchers("/", "/*.*", "/brands", "/login", "/about", "/home", "/models", "/assets/**",  "/posts/**", 
+				.disable().authorizeRequests().antMatchers( "/posts/**", "/", "/*.*", 
+						"/brands", "/login", "/about", "/home",
+						"/models", "/assets/**", 
 						"/api/v1/authenticate", "/register")
 				/* for testing */
-//				.authorizeRequests().antMatchers("/**", "/companies/**", "/products/**" ,"/assets/**", "/posts/**"
+//				.authorizeRequests().antMatchers("/**", "/companies/**", "/products/**" ,"/assets/**", "/posts/**".
 //						"/api/v1/authenticate", "/register")
 				.permitAll().anyRequest().authenticated().and().
 				// all other requests need to be authenticated
@@ -80,6 +77,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
+    @Override
+    public void configure(WebSecurity webSecurity) throws Exception {
+       webSecurity
+       .ignoring()
+        // All of Spring Security will ignore the requests
+        .antMatchers("/posts/**");
+       }  
+	
 //	@Bean
 //	CorsConfigurationSource corsConfigurationSource() {
 //		CorsConfiguration configuration = new CorsConfiguration();
