@@ -1,0 +1,31 @@
+<div *ngIf="checkLogin()">
+  <div class="row">
+    <div class="col-sm-6" *ngFor="let item of products">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.phone_name }} </h5>
+          <p class="card-text">{{ item.description }}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    <ngb-pagination  *ngIf="ifTotalPages(pagePagination.totalPages)" class="d-flex justify-content-center pagination" [collectionSize]=collectionSize [(page)]="page" [maxSize]="4" [rotate]="true" [boundaryLinks]="true" 
+    (pageChange)="pageChanged($event)"></ngb-pagination>
+
+</div>
+<div *ngIf="elmentIsZiro">
+ <p>
+  No models this time for <b>{{ company }}</b>
+ </p> 
+ <p>
+  Schow all <a class="nav-linke" [routerLink]="'/models'">models</a> or back to <a class="nav-linke" [routerLink]="'/brands'">brands</a> 
+ </p>
+</div>
+<app-redirect-to-login></app-redirect-to-login>
+
+
+
+

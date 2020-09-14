@@ -1,0 +1,18 @@
+main {
+  margin-bottom: 75px;
+  padding-top: 20px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  line-height: 60px;
+}
+footer .footer {
+  margin: auto;
+}
+
+code {
+  font-size: 80%;
+}

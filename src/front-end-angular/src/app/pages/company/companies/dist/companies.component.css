@@ -1,0 +1,12 @@
+td.links {
+  text-align: right;
+  padding-right: 5px;
+}
+td.links .margin-link {
+  margin: 2px 5px;
+}
+
+thead th {
+  background-color: #2b73b3;
+  border-color: black;
+}
